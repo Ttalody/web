@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Лабораторная работа 2</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<style type="text/css">
+	table, td, th {
+		border: 1px solid black;
+	}
+</style>
+<body>
+</body>
+	<script>
+		let body = document.querySelector('body')
+
+	const module = (function(){
+	    let arr=[
+	        {
+	            name:'Alex',
+	            surname :'Demko',
+	            age : 18,
+	            avmark : 8.0,
+	        },
+	        {
+	            name:'Ivan',
+	            surname :'Robinson',
+	            age : 18,
+	            avmark : 10.0,
+	        },
+	        {
+	            name:'Miguel',
+	            surname :'Rodriguez',
+	            age : 18,
+	            avmark : 9.0,
+	        },
+	        {  
+	            name:'Nyjah',
+	            surname :'Huston',
+	            age : 18,
+	            avmark : 10.0,
+	        },
+	        {
+	            name:'Jonny',
+	            surname :'Giger',
+	            age : 18,
+	            avmark : 10.0,
+	        }
+	    ]
+	   let keys = Object.keys(arr[0])
+	    function getValue(i,j){
+	        return Object.values(arr[i])[j];
+	    }
+	    return{
+	        getTable: function(){
+	           let table=body.appendChild(document.createElement('table'))
+	            for(let i=0;i<=arr.length;i++)
+	            {
+	               let tr=document.createElement('tr')
+	               table.appendChild(tr)
+	                if(i===0){
+	                    for(let j=0;j<keys.length;j++){
+	                       let th=document.createElement('th')
+	                        tr.appendChild(th)
+	                        th.innerText=keys[j]
+	                    }
+	                }
+	                else{
+	                    for(let j=0;j<keys.length;j++){
+	                       let td=document.createElement('td')
+	                        if(keys[j]==='avmark'){
+	                            td.className='avmark'
+	                        }
+	                        tr.appendChild(td)
+	                        td.innerText=getValue(i-1,j)
+	                    }
+	                }
+	            }
+	        },
+	        getAvMark: function(){
+	            let sum=0;
+	            let marks=document.querySelectorAll('.avmark')
+	            for(let i=0;i<marks.length;i++){
+	                let mark = +marks[i].innerText
+	                sum+=mark
+	            }
+	           let result = sum / arr.length
+	            return result.toFixed(2)
+	        }
+	    }
+	}() )
+
+	module.getTable()
+
+	div=body.appendChild(document.createElement('div'))
+	div.innerText="Average mark is " +  module.getAvMark()
+	</script>
+</html> 
